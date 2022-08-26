@@ -9,6 +9,11 @@
 #import "ViewController.h"
 #import <NetworkExtension/NetworkExtension.h>
 #import <SystemConfiguration/CaptiveNetwork.h>
+#import "AxLocationTool.h"
+
+
+typedef void(^GetWifiNameResult)(NSString *ssid);
+
 @interface ViewController ()
 
 @end
@@ -17,21 +22,26 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    __weak typeof(self) weakSelf = self;
     if (@available(iOS 11.0, *)) {
-        NEHotspotConfiguration *configuration=[[NEHotspotConfiguration alloc]initWithSSID:@"你好吗"];
+        NEHotspotConfiguration *configuration=[[NEHotspotConfiguration alloc]initWithSSID:@"wiodo-cy07"];
        // configuration.joinOnce=YES;
-//        NEHotspotConfiguration *configuration=[[NEHotspotConfiguration alloc]initWithSSID:@"mxchip-offices" passphrase:@"88888888" isWEP:NO];
+//        NEHotspotConfiguration *configuration=[[NEHotspotConfiguration alloc]initWithSSID:@"guest" passphrase:@"sihuacloud" isWEP:NO];
         [[NEHotspotConfigurationManager sharedManager]applyConfiguration:configuration completionHandler:^(NSError * _Nullable error) {
-            if ([[self getCurrentWifi] isEqualToString:configuration.SSID]) {
-                if (error) {
-                    NSLog(@"加入网络失败--%@",error);
-                }else
-                {
-                    NSLog(@"加入网络成功");
-                }
-            }else
-            {
-                NSLog(@"加入网络失败--no error");
+            
+            if (@available(iOS 13.0, *)) {
+                [[AxLocationTool shareInstance]startLocationWithBlock:^(BOOL isSuccess, AxLocationModel * _Nonnull locationModel) {
+                    [weakSelf getCurrentWifi:^(NSString *ssid) {
+                        NSLog(@"iOS 13.0以上   %@",ssid);
+                        [weakSelf checkWifiName:ssid configuration:configuration error:error];
+                    }];
+                }];
+            }else{
+                [weakSelf getCurrentWifi:^(NSString *ssid) {
+                    NSLog(@"iOS 13.0以下   %@",ssid);
+                    [weakSelf checkWifiName:ssid configuration:configuration error:error];
+                }];
             }
             
         }];
@@ -45,19 +55,40 @@
         
     }
 }
--(NSString *)getCurrentWifi
-{
-    NSString *ssid = nil;
-    NSArray *ifs = (__bridge   id)CNCopySupportedInterfaces();
-    for (NSString *ifname in ifs) {
-        NSDictionary *info = (__bridge id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifname);
-        if (info[@"SSID"])
+-(void)checkWifiName:(NSString *)wifiName configuration:(NEHotspotConfiguration *)configuration error:(NSError *)error API_AVAILABLE(ios(11.0)){
+    if ([wifiName isEqualToString:configuration.SSID]) {
+        if (error) {
+            NSLog(@"加入网络失败--%@",error);
+        }else
         {
-            ssid = info[@"SSID"];
+            NSLog(@"加入网络成功");
         }
+    }else
+    {
+        NSLog(@"加入网络失败--no error");
     }
-    return ssid;
 }
+
+-(void)getCurrentWifi:(GetWifiNameResult)result
+{
+    if(@available(iOS 14.0, *)){
+        [NEHotspotNetwork fetchCurrentWithCompletionHandler:^(NEHotspotNetwork * _Nullable currentNetwork) {
+            !result?:result(currentNetwork.SSID);
+        }];
+    }else{
+        NSArray *ifs = (__bridge   id)CNCopySupportedInterfaces();
+        NSString *ssid = nil;
+        for (NSString *ifname in ifs) {
+            NSDictionary *info = (__bridge id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifname);
+            if (info[@"SSID"])
+            {
+                ssid = info[@"SSID"];
+            }
+        }
+        !result?:result(ssid);
+    }
+}
+
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     NSString *jumpCode = @"App-Prefs:root=WIFI";

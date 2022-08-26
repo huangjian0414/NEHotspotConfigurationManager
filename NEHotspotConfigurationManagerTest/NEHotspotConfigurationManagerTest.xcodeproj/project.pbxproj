@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6B3A177728B8C87F004AE121 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B3A177628B8C87F004AE121 /* SystemConfiguration.framework */; };
+		6B3A177A28B8CABC004AE121 /* AxLocationTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 6B3A177928B8CABC004AE121 /* AxLocationTool.m */; };
 		7E5AFFBA211EA0ED00D44E24 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5AFFB9211EA0ED00D44E24 /* AppDelegate.m */; };
 		7E5AFFBD211EA0ED00D44E24 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7E5AFFBC211EA0ED00D44E24 /* ViewController.m */; };
 		7E5AFFC0211EA0ED00D44E24 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7E5AFFBE211EA0ED00D44E24 /* Main.storyboard */; };
@@ -17,6 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		6B3A177628B8C87F004AE121 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		6B3A177828B8CABC004AE121 /* AxLocationTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AxLocationTool.h; sourceTree = "<group>"; };
+		6B3A177928B8CABC004AE121 /* AxLocationTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AxLocationTool.m; sourceTree = "<group>"; };
 		7E5AFFB5211EA0ED00D44E24 /* NEHotspotConfigurationManagerTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NEHotspotConfigurationManagerTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7E5AFFB8211EA0ED00D44E24 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		7E5AFFB9211EA0ED00D44E24 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -36,6 +41,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6B3A177728B8C87F004AE121 /* SystemConfiguration.framework in Frameworks */,
 				7E5AFFD0211EA1A500D44E24 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -66,6 +72,8 @@
 				7E5AFFD1211EA1AF00D44E24 /* NEHotspotConfigurationManagerTest.entitlements */,
 				7E5AFFB8211EA0ED00D44E24 /* AppDelegate.h */,
 				7E5AFFB9211EA0ED00D44E24 /* AppDelegate.m */,
+				6B3A177828B8CABC004AE121 /* AxLocationTool.h */,
+				6B3A177928B8CABC004AE121 /* AxLocationTool.m */,
 				7E5AFFBB211EA0ED00D44E24 /* ViewController.h */,
 				7E5AFFBC211EA0ED00D44E24 /* ViewController.m */,
 				7E5AFFBE211EA0ED00D44E24 /* Main.storyboard */,
@@ -80,6 +88,7 @@
 		7E5AFFCE211EA1A500D44E24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6B3A177628B8C87F004AE121 /* SystemConfiguration.framework */,
 				7E5AFFCF211EA1A500D44E24 /* NetworkExtension.framework */,
 			);
 			name = Frameworks;
@@ -163,6 +172,7 @@
 				7E5AFFBD211EA0ED00D44E24 /* ViewController.m in Sources */,
 				7E5AFFC8211EA0EE00D44E24 /* main.m in Sources */,
 				7E5AFFBA211EA0ED00D44E24 /* AppDelegate.m in Sources */,
+				6B3A177A28B8CABC004AE121 /* AxLocationTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -304,14 +314,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NEHotspotConfigurationManagerTest/NEHotspotConfigurationManagerTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F49XPGKUF7;
+				DEVELOPMENT_TEAM = Y7HVALW8ZT;
 				INFOPLIST_FILE = NEHotspotConfigurationManagerTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.atomi.atomites;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hotspotconfiguration.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -323,14 +333,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = NEHotspotConfigurationManagerTest/NEHotspotConfigurationManagerTest.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = F49XPGKUF7;
+				DEVELOPMENT_TEAM = Y7HVALW8ZT;
 				INFOPLIST_FILE = NEHotspotConfigurationManagerTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.atomi.atomites;
+				PRODUCT_BUNDLE_IDENTIFIER = com.hotspotconfiguration.demo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
